@@ -1,0 +1,124 @@
+@model TechTalk.Models.TimelinePost.TPostIndexModel
+<style>
+.postIndexBody {
+    background-color: rgba(128,0,128, 0.2);
+}
+</style>
+
+ <div class="sectionHeader">
+    <div class="sectionHeading">
+          @if (Context.User.Identity.IsAuthenticated)
+        {
+             <span style="margin-top: 0 !important; float: right; margin-right: 2em;">
+                                    <a asp-controller="TimelineReply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newPostReply">
+                                        Reply to @Model.AuthorFirstName 's Post
+                                        </a>
+                                </span>
+        }
+<h2>@Model.AuthorFirstName @Model.AuthorLastName 's Post</h2>
+    </div>
+ </div>
+
+
+
+             <div class="row timePost" style=" padding-top: 35px; margin-bottom: 3em;">
+            <div class="col-md-4"></div>
+        
+             
+                
+       <div class="col-md-4">            
+                   <div class="row" style="background-color: #2c2929;">    
+                       <div class="col-md-1">
+ <div class="img-circle forumIndexImage" style="background-image: url(@Model.AuthorImageUrl); width: 50px; height: 50px;"></div>
+ </div>
+ <div class="col-md-10">
+  <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" style="color: black; display: inline;">
+        <h5 style="padding-left: 2em; color: #5ee9d6; font-weight: bold;">@Model.AuthorFirstName @Model.AuthorLastName 
+          @if (Model.IsAuthorAdmin)
+               {
+                   <div class="isAdmin smaller"><small>Admin</small></div>
+                   <br/>
+               }</h5>
+        <strong style="padding-left: 2em; color: white;"> @Model.Created  </strong>
+        </a>
+        </div>
+        </div>
+        <div class="row" style="background-color: white;">
+                      
+                   <p style="font-size: 23px;">@Model.PostContent </p> 
+        </div>
+         <div class="row" style="background-color: #2c2929; height: 2em;">
+            
+                     </div> 
+         <div class="row" style="margin-bottom: 2em;">
+                <div class="col-md-1 col-md-offset-6">
+                @if (User.Identity.IsAuthenticated)
+                        {
+                            
+                                <span style="margin-top: 0 !important;">
+                                    <a asp-controller="TimelineReply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newPostReply">
+                                        Reply to @Model.AuthorFirstName 's Post
+                                        </a>
+                                </span>
+                        
+                        }
+                </div>
+            </div>
+           
+
+       </div>
+             
+            </div>
+
+
+@if (Model.Replies.Any())
+{
+    foreach(var replies in Model.Replies)
+    {
+                     <div class="row timePost" style=" padding-top: 5px; margin-bottom: 3em;">
+            <div class="col-md-5"></div>
+        
+             
+                
+       <div class="col-md-3">            
+                   <div class="row" style="background-color: #2c2929;">    
+                       <div class="col-md-1">
+ <div class="img-circle forumIndexImage" style="background-image: url(@replies.AuthorImageUrl); width: 50px; height: 50px;"></div>
+ </div>
+ <div class="col-md-10">
+  <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" style="color: black; display: inline;">
+        <h5 style="padding-left: 2em; color: #5ee9d6; font-weight: bold;">@replies.AuthorFirstName @replies.AuthorLastName
+          @if (replies.IsAuthorAdmin)
+               {
+                   <div class="isAdmin smaller"><small>Admin</small></div>
+                   <br/>
+               }</h5>
+        <strong style="padding-left: 2em; color: white;"> @replies.Created </strong>
+        </a>
+        </div>
+        </div>
+        <div class="row" style="background-color: lightgrey;">
+                      
+                    <p style="font-size: 23px; color: black; padding: 0.2em; margin-left: 0.5em;">@replies.PostContent </p>  
+                    @Html.Raw(replies.ReplyContent)
+        </div>
+        <div class="row" style="background-color: #2c2929; height: 2em;">
+            
+                     </div>
+       </div>
+             
+            </div>
+              
+         
+    }
+}
+else
+{
+    <div class="noPosts">
+        <h3>
+            There are no replies to this post.
+        </h3>
+    </div>
+}
+</div>
+                      

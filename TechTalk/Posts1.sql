@@ -1,0 +1,10 @@
+BEGIN TRANSACTION;
+INSERT INTO `Posts` VALUES (1,'First Python Post','First Python Post!','2018-11-26 15:50:08','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (2,'Second Python Post','Second Python Post!','2018-11-26 15:50:08','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (3,'Third Python Post','Python Testing! ','2018-11-26 15:50:08','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (4,'Another Python Post','Python for Machine Learning','2018-11-26 15:50:08','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (5,'Post from form','Hello new app of mine!','2018-11-26 15:54:34.9873331','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (6,'Post from form','Hello new app','2018-11-26 16:02:16.4442837','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (7,'Machine learning ','Booooooooooooooooom','2018-11-26 19:31:14.5625001','cb121c0c-c202-4c36-8af2-ba896a01e5c4',1);
+INSERT INTO `Posts` VALUES (8,'C# & ASP.NET Core','Tips on implementing the world''s great greatest language into the worlds greatest framework','2018-11-26 19:33:11.1186192','cb121c0c-c202-4c36-8af2-ba896a01e5c4',2);
+COMMIT;

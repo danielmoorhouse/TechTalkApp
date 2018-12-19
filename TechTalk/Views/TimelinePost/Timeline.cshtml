@@ -1,0 +1,78 @@
+@model TechTalk.Models.TimelinePost.TimelinePostIndexModel
+<style>
+     .postIcon {
+        color: white;
+    } 
+        .postIcon:hover {
+        color: #5ee9d6;
+    } 
+    .btnTimePost {
+        background-color: #2c2929;
+        color: white;
+    }
+    .btnTimePost:hover {
+        color: #5ee9d6;
+    }
+    .timePost {
+        
+    }
+  
+    h2 {
+        color: white;
+        margin-bottom: 2em;
+       
+    }
+</style>
+ <div class="sectionHeader">
+    <div class="sectionHeading">
+          @if (Context.User.Identity.IsAuthenticated)
+        {
+             <span id="headingBtn">
+             <a asp-controller="TimelinePost"
+             asp-action="Create" class="btn btn-newPost">
+             Create Timeline Post
+             </a>
+            </span>
+        }
+<h2 style="color: #5ee9d6;">Social Timeline</h2>
+    </div>
+ </div>
+ 
+ 
+     <div class="container-fluid timelineContent">
+         <h2 style="margin-left: 8em; color: #5ee9d6; background-color: #2c2929;">What's Everyone Up To Today?</h2>
+        @foreach(var post in Model.TPostList)
+        {
+            <div class="row timePost" style=" padding-top: 5px; margin-bottom: 3em;">
+            <div class="col-md-3"></div>
+        
+             
+                
+       <div class="col-md-4">            
+                   <div class="row" style="background-color: #2c2929;">    
+                       <div class="col-md-1">
+ <div class="img-circle forumIndexImage" style="background-image: url(@post.AuthorImageUrl); width: 60px; height: 60px;"></div>
+ </div>
+ <div class="col-md-10">
+  <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId" style="color: black; display: inline;">
+        <h4 style="padding-left: 2em; color: #5ee9d6; font-weight: bold;">@post.AuthorFirstName @post.AuthorLastName </h4>
+        <strong style="padding-left: 3em; color: white;"> @post.DatePosted </strong>
+        </a>
+        </div>
+        </div>
+        <div class="row" style="background-color: white;">
+                      
+                    <p style="font-size: 23px; color: black; padding: 0.7em;">@post.PostContent </p>  
+        </div>
+        <div class="row" style="background-color: #2c2929;">
+                <!-- <a class="btn btnTimePost"><i class="material-icons postIcon">thumb_up_alt</i></a> -->
+                <a asp-controller="TimelinePost" asp-action="Index" asp-route-id="@post.Id" class="btn btnTimePost" style="float: right;"> @post.RepliesCount
+                         <i class="material-icons postIcon">chat</i></a>
+                     </div>
+       </div>
+             </div>      
+                     
+     }
+     </div>
+
+       

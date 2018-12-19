@@ -1,0 +1,36 @@
+@model TechTalk.Models.Forum.AddForumModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            Create New Forum
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center" style="background-color: #2c2929; margin-top: 3em; padding: 2%; border: 5px solid #5ee9d6">
+        <div id="createForumSection">
+            <form asp-action="AddForum" method="post" id="createForumForm" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                   
+                    <input asp-for="Title" class="form-control" placeholder="Choose forum title"/>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    
+                    <input asp-for="Description" class="form-control" placeholder="Write a brief description of the forum topic"/>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div id="upload">
+                    <label style="color: #5ee9d6;">Upload Forum Image</label>
+                    <br />
+                    <label class="btn btn-default btn-file">
+                        Browse <input asp-for="ImageUpload" typeof="file" style="display: none">
+                    </label>
+                </div>
+                <button type="submit" id="newFormBtn" class="btn btn-submitPost" style="margin-top: 20px;">Create Forum</button>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>

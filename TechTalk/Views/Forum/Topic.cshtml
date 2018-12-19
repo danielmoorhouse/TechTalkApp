@@ -1,0 +1,104 @@
+@model TechTalk.Models.Forum.ForumTopicModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+     <div class="sectionHeading"> 
+        <span>@Model.Forum.Name Forum</span>
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+             <span id="headingBtn">
+             <a asp-controller="Post"
+             asp-action="Create" asp-route-id=@Model.Forum.Id class="btn btn-newPost">
+             Create Post
+             </a>
+            </span>
+        }
+        <form asp-controller="Forum" asp-action="Search" method="post">
+            <div class="searchForm">
+                <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                <button type="submit" class="btn btn-forumSearch">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+            <input asp-for="Forum.Id" name="id" type="hidden" />
+        </form>
+        </div>  
+        <div class="sectionDescription">
+            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl);"></div>
+            <p>Welcome to the @Model.Forum.Name forum. Please keep on topic and respect your fellow users.</p>
+
+            @if(!User.Identity.IsAuthenticated)
+            {
+            <p>
+                <span>You must be a member to post on TechTalk Forums - <a asp-controller="Account" asp-action="Register">Register Now</a>  </span>
+            </p>
+            }
+        </div>
+    </div>
+    <div class="row forumIndexContent">
+        @if(Model.Posts.Any())
+        {
+            <table class="table table-hover table-bordered" id="topicIndexTable">
+                <tbody>
+                    @foreach(var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            <span>
+                                                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId" class="postAuthor">
+                                                    @post.AuthorName
+                                                </a>
+                                            </span>
+                                            (@post.AuthorRating)
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                Replies: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">@post.DatePosted</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else 
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">question_answer</i>
+                <h3>Sorry there are no posts.
+                    Why not
+                 <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
+                     <span>create</span>
+                 </a>  
+                    one?
+                </h3>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+<script>
+function clearThis(target) {
+    target.value = "";
+}
+</script>
+
+}
+
+
+

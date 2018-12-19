@@ -1,0 +1,5 @@
+SELECT p.Title AS PostTitle, f.Title AS ForumName, u.Email
+FROM Posts p
+	INNER JOIN Forums f ON p.ForumId = f.Id
+	INNER JOIN AspNetUsers u ON u.Id = p.UserId
+WHERE p.Id = 1

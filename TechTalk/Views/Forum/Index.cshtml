@@ -1,0 +1,28 @@
+@model TechTalk.Models.Forum.ForumIndexModel
+
+<h1>Forums</h1>
+
+        @foreach(var forum in Model.ForumList)
+        {
+             <div class="row" style="background-color: lightgrey; border-bottom: 2px solid darkgrey; padding-top: 5px;">
+          <div class="col-md-1">
+      <div class="forumIndexImage" style="background-image: url(@forum.ImageUrl);"></div>
+    </div>
+    <div class="col-md-4">
+          <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id" style="color: black;">
+                   @forum.Name
+                    </a>
+    </div>
+     <div class="col-md-5">
+          
+                   @forum.Description
+                  
+    </div>
+     <div class="col-md-2">
+        
+    </div>
+    </div>
+        }
+   
+
+   

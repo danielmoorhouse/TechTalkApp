@@ -1,0 +1,25 @@
+
+@model IEnumerable<TechTalk.Data.Models.ApplicationUser>
+
+<div class="inner-wrapper">
+    <h2 class="subtitle center">@ViewBag.Message</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var user in Model)
+        {
+            <div class="post tight">
+                <div class="post__top">
+                    <a href="@Url.Action("Detail", "Profile", new { @id = user.UserName })">
+                       
+                    </a>
+                    <a href="@Url.Action("Detail", "Profile", new { @id = user.UserName })" class="post__user">@user.UserName</a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</div>

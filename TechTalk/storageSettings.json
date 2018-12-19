@@ -1,0 +1,5 @@
+{
+    "ConnectionStrings": {
+        "AzureStorageAccount": "DefaultEndpointsProtocol=https;AccountName=techtalk12;AccountKey=wGMgl7QjkRhsFXabXvGdDqiiq+mh3DUYDCL8L+/rk9jFxyzOH0nExR9MvOMTcb5LPnUlczfVS6dhm8BVSUcVDA==;EndpointSuffix=core.windows.net"
+    }
+}

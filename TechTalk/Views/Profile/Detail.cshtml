@@ -1,0 +1,159 @@
+@using Microsoft.AspNetCore.Identity
+@model TechTalk.Models.ApplicationUser.ProfileModel
+@inject RoleManager<TechTalk.Data.Models.ApplicationRole> RoleManager
+@inject UserManager<TechTalk.Data.Models.ApplicationUser> UserManager
+<style>
+    .profPosts {
+        background-color: rgba(0,255,0,0.2);
+    }
+       .userProfile {
+        background-color: rgba(0,255,255,0.2);
+    }
+    #userName {
+        color: black
+    }
+       .postIcon {
+        color: white;
+    } 
+        .postIcon:hover {
+        color: #5ee9d6;
+    } 
+    .btnTimePost {
+        background-color: #2c2929;
+        color: white;
+    }
+    .btnTimePost:hover {
+        color: #5ee9d6;
+    }
+    
+</style>
+
+
+
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            User Profile
+              <div>
+          
+            
+            </div>
+
+        </div>
+   
+    </div>
+    <div class="row userProfile">
+        <div class="col-md-4">
+        
+          <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl)"></div>
+            @if (User.Identity.Name == Model.UserName)
+            {
+                <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+                    <div id="upload">
+                        <label class="btn btn-default btn-file" style="width: 33%;">
+                            Change Pic? <input type="file" name="file" style="display: none" />
+                        </label>
+                    </div>
+                    <button type="submit" id="btn-profile" class="btn btn-default">Submit Change</button>
+                </form>
+            }
+            @if (User.Identity.Name != Model.UserName)
+            {
+                <ul class="profile__meta">
+                    <li><strong>@Model.PostCount</strong> posts</li>
+                    <li>
+                        <a href="@Url.Action("Followers", "Profile", new { id = Model.UserId })"
+                           class="modal-link" data-ajax-url="@Url.Action("Followers", "Profile", new { id = Model.UserId })"
+                           data-ajax-method="get"><strong>@Model.FollowerCount</strong> followers</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Following", "Profile", new { id = Model.UserId })"
+                           class="modal-link" data-ajax-url="@Url.Action("Following", "Profile", new { id = Model.UserId })"
+                           data-ajax-method="get">
+                            <strong>@Model.FollowingCount</strong> following
+                        </a>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul class="profile__meta">
+                    <li><strong>@Model.PostCount</strong> posts</li>
+                    <li><strong>@Model.FollowerCount</strong> followers</li>
+                    <li><strong>@Model.FollowingCount</strong> following</li>
+                </ul>
+            }
+          
+               @if (Model.OwnProfile)
+            {
+              
+            }
+            else
+            {
+                <a class="button follow-button @(Model.Following ? "following" : string.Empty)"
+                   href="@Url.Action(Model.Following ? "Unfollow" : "Follow", "Follow", new { userName = Model.UserName })">
+                    @(Model.Following ? "Following" : "Follow")
+                </a>
+            }
+        </div>
+        <div class="col-md-8">
+            
+             <span id="userName">@Model.FirstName @Model.LastName</span>
+                @if(Model.IsAdmin)
+            {
+                 <span class="isAdmin">Admin</span>
+            }
+              <span id="userName">@Model.UserName</span>
+           
+           
+            <span id="userRating">Current Forum Rating: @Model.UserRating</span>
+            <span id="userEmailLabel">Email: @Model.Email</span>
+            <span id="userCreatedLabel">Location: @Model.Location</span>
+            <span id="userCreatedLabel">Favourite Technologies: @Model.MyTech</span>
+             <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
+        </div>
+    </div>
+    
+    <div class="sectionHeader">
+    <div class="sectionHeading">
+        @Model.FirstName 's Latest Posts 
+       </div>
+       </div>
+    
+            @foreach (var posts in Model.Posts)
+            {
+                                <div class="row timePost" style=" padding-top: 5px; margin-bottom: 3em;">
+            <div class="col-md-3"></div>
+        
+             
+                
+       <div class="col-md-4">            
+                   <div class="row" style="background-color: #2c2929;">    
+                       <div class="col-md-1">
+ <div class="img-circle forumIndexImage" style="background-image: url(@Model.ProfileImageUrl); width: 50px; height: 50px;"></div>
+ </div>
+ <div class="col-md-10">
+  <a asp-controller="Profile" asp-action="Detail" asp-route-id="@posts.User.Id" style="color: black; display: inline;">
+        <h4 style="padding-left: 2em; color: #5ee9d6; font-weight: bold;">@posts.User.FirstName  @posts.User.LastName </h4>
+        <strong style="padding-left: 3em; color: white;"> @posts.Created </strong>
+        </a>
+        </div>
+        </div>
+        <div class="row" style="background-color: white;">
+                      
+                    <p style="font-size: 23px; color: black; padding: 0.7em;">@posts.Content </p>  
+        </div>
+        <div class="row" style="background-color: #2c2929;">
+                <a class="btn btnTimePost"><i class="material-icons postIcon">thumb_up_alt</i></a>
+                <a asp-controller="TimelinePost" asp-action="Index" asp-route-id="@posts.Id" class="btn btnTimePost" style="float: right;"> @posts.Replies
+                         <i class="material-icons postIcon">chat</i></a>
+                     </div>
+       </div>
+             </div>  
+            }
+
+    
+      
+   
+

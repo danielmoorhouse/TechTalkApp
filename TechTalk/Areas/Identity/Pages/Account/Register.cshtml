@@ -1,0 +1,69 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<style>
+    h4 {
+        color: white;
+    }
+ 
+</style>
+
+
+
+<div class="row" style="margin-top: 3em;">
+    <div class="col-md-4 col-md-offset-4 text-center"  style="background-color: rgba(0,0,0,0.5); border-radius: 25px;">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+             <h4> <img src="/images/app-logo-s.png" style="width: 60px; height: 60px;"> TechTalk - friends and forums</h4> 
+              <h4>Register</h4> 
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                
+                <input asp-for="Input.Email" class="form-control" placeholder="Email"/>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <input asp-for="Input.UserName" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                
+                <input asp-for="Input.FirstName" class="form-control" placeholder="First Name"/>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                
+                <input asp-for="Input.LastName" class="form-control" placeholder="Last Name"/>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+            
+                <input asp-for="Input.Location" class="form-control" placeholder="Location" />
+                <span asp-validation-for="Input.Location" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                
+                <input asp-for="Input.MyTech" class="form-control" placeholder="Favourite Technology" />
+                <span asp-validation-for="Input.MyTech" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            
+                <input asp-for="Input.Password" class="form-control" placeholder="Password"/>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+        
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password"/>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-newPost" style="margin-bottom: 2em;">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
