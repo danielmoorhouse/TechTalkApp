@@ -1,5 +1,0 @@
-INSERT INTO Posts (Content, Created, ForumId, Title, UserId)
-VALUES('First Computer Science post, bloody brilliant!!!', DATETIME('now'), 1, 'First Post', '86d06779-01c7-4f46-bec5-3a10ae913a8f'),
-('Wow what a fabulous forum, it oozes style and class....lol get it..... Class!!!', DATETIME('now'), 1, 'Second Post', '7ba844c5-eba6-49bb-aaca-f3def70bfc2b'),
-('Computer science is not for nerds....its for geniuses....Like me!!! ', DATETIME('now'), 1, 'Third Post', '86d06779-01c7-4f46-bec5-3a10ae913a8f'),
-('Who built this web application? damn....its fine :)', DATETIME('now'), 1, 'Another Post', '7ba844c5-eba6-49bb-aaca-f3def70bfc2b');
